@@ -1,4 +1,14 @@
 {
+	"units": {
+		"placeholder": "undefined"
+	},
+	"users": {
+		"15b1571d-fbce-447c-9778-6234f1f4e729": {
+			"units": {
+				"placeholder": "undefined"
+			}
+		}
+	},
 	"viewerModels": {
 		"currencyviewer": {
 			"parameters": {
