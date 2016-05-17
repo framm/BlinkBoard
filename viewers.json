@@ -1,0 +1,36 @@
+{
+	"viewerModels": {
+		"currencyviewer": {
+			"parameters": {
+				"from": "^[A-Z]{3}$",
+				"to": "^[A-Z]{3}$",
+				"updatefrequency": "^[1-9]\\d{1,}$"
+			},
+			"size": {
+				"height": "75",
+				"width": "450"
+			}
+		},
+		"rssviewer": {
+			"parameters": {
+				"stories": "^[1-9]*$",
+				"updatefrequency": "^[1-9]\\d{1,}$",
+				"url": "^(http).*//[a-z]+\\..*$"
+			},
+			"size": {
+				"height": "300",
+				"width": "400"
+			}
+		},
+		"stockviewer": {
+			"parameters": {
+				"symbol": "^[A-Z]+$",
+				"updatefrequency": "^[1-9]\\d{1,}$"
+			},
+			"size": {
+				"height": "260",
+				"width": "380"
+			}
+		}
+	}
+}

@@ -1,0 +1,51 @@
+@import "mixins";
+$stockviewer-red: red;
+$stockviewer-green: green;
+stockviewer {
+	justify-content: space-around;
+	display: flex;
+	flex-flow: column wrap;
+	text-align: center;
+	.header {
+		.name {
+			font-weight: 500;
+			display: inline-block;
+		}
+		.symbol {
+			font-weight: 700;
+			display: inline-block;
+		}
+	}
+	.stats {
+		display: flex;
+		justify-content: center;
+		flex-flow: row wrap;
+		font-weight: 400;
+		font-size: 4rem;
+		margin-top: 1rem;
+		.LastPrice {
+			margin-right: 3rem;
+			display: inline-block;
+		}
+		.ChangePercent {
+			display: inline-block;
+			.arrow {
+				display: inline-block;
+				position: relative;
+				top: -0.8rem;
+			}
+			.negative {
+				border-top: 1.3rem solid $stockviewer-red;
+				border-right: 1.3rem solid transparent;
+				border-bottom: 0 solid transparent;
+				border-left: 1.3rem solid transparent;
+			}
+			.positive {
+				border-top: 0 solid transparent;
+				border-right: 1.3rem solid transparent;
+				border-bottom: 1.3rem solid $stockviewer-green;
+				border-left: 1.3rem solid transparent;
+			}
+		}
+	}
+}
