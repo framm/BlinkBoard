@@ -13,7 +13,6 @@ In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.co
 ### Installation
 Having cloned the repository, cd into the `BlinkBoard` directory and run `npm install`. Then cd into the `public` directory and run `bower install`. Now you need to create a [FireBase](https://www.firebase.com/) account. When finished you have the information needed in order to setup the environment variables. Create a file called `.env` in the root 'BlinkBoard' directory and fill it out as follows:
 ```
-#!bash
 FIREBASE_URL=[insert Firebase url (e.g. https://myapp.firebaseio.com/)]
 FIREBASE_APPSECRET=[insert Firebase app secret]
 PORT=[insert the port you want to use (e.g. 80)]
@@ -39,6 +38,3 @@ When running the server, 3 endpoints become available:
 
 ### How to Add Viewers
 As previously mentioned, viewers are simply Angular directives with parameters. The outlines of these parameters are defined in the `viewerModels` database-object, so by adding to this, you can define your own. Look at the sample viewers in `public/viewers/` for inspiration. Please take note that currently you need to refresh the dashboard hosting device after having added a new viewer type, as directives are dependencies of Angular on initilization.
-
-
-![cc](README/cc.svg)
