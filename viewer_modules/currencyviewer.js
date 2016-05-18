@@ -65,19 +65,19 @@ var j = schedule.scheduleJob(rule, function() {
 // Visible object
 module.exports = {
 	getData: function(req, res) {
+		// Format currency-symbols to fit the flags on the client
+		function formatToFlag(string) {
+			string = string.substring(0, string.length - 1);
+			string = string.toLowerCase();
+
+			return string;
+		}
+
 		try {
 			// Wait for data to arrive
 			if (currencyData === {}) {
 				return;
 			};
-
-			// Format currency-symbols to fit the flags on the client
-			function formatToFlag(string) {
-				string = string.substring(0, string.length - 1);
-				string = string.toLowerCase();
-
-				return string;
-			}
 
 			// Construct return object
 			var object = {
