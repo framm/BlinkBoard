@@ -96,47 +96,82 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 			// Show spinner
 			$scope.loading = true;
 
+			/*
+			// Check if user has any data
+			firebaseUserRef.once("value", function(user) {
+				console.log(user.val());
+				// If no data exists, create it
+				if (user.val() === null) {
+					// Contruct user-object
+					var userObject = {
+						'users': {
+							[firebaseUserRef.getAuth().uid]: {
+								'units': {}
+							}
+						}
+					}
+
+					firebaseUserRef.set(userObject).then(function() {
+						firebaseUserRef.once("value", function(user) {
+							console.log(user.val());
+						});
+					});
+				}
+			});
+			return;
+			*/
+
 			// Get user/unit data
 			firebaseUserRef.once("value", function(user) {
-				// Data-related promises
-				var promises = [];
+				// Check if user has any data
+				if (user.val() === null) {
+					console.log('no units');
 
-				// Get unit data for each owned unit
-				angular.forEach(user.val().units, function(key, unitID) {
-					// 1 promise per unit
-					var unitPromise = $q.defer();
-
-					// Connection to specific unit
-					var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + unitID + '/');
-
-					firebaseUnitRef.once("value", function(unit) {
-						// Construct corrctly formattet unit object
-						var unitObject = {};
-						unitObject[unitID] = unit.val();
-
-						// Resolve unit promise
-						unitPromise.resolve(unitObject);
-					});
-
-					// Push promise ahead
-					promises.push(unitPromise.promise);
-				});
-
-				// When all unit data is ready
-				$q.all(promises).then(function(units) {
-					// Populate units object
 					$scope.units = {};
-
-					// Convert returned array into object og objects
-					for (var i = units.length - 1; i >= 0; i--) {
-						var currentKey = Object.keys(units[i])[0];
-
-						$scope.units[currentKey] = units[i][currentKey];
-					}
 
 					// Hide spinner
 					$scope.loading = false;
-				});
+				} else {
+					// Data-related promises
+					var promises = [];
+
+					// Get unit data for each owned unit
+					angular.forEach(user.val().units, function(key, unitID) {
+						// 1 promise per unit
+						var unitPromise = $q.defer();
+
+						// Connection to specific unit
+						var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + unitID + '/');
+
+						firebaseUnitRef.once("value", function(unit) {
+							// Construct corrctly formattet unit object
+							var unitObject = {};
+							unitObject[unitID] = unit.val();
+
+							// Resolve unit promise
+							unitPromise.resolve(unitObject);
+						});
+
+						// Push promise ahead
+						promises.push(unitPromise.promise);
+					});
+
+					// When all unit data is ready
+					$q.all(promises).then(function(units) {
+						// Populate units object
+						$scope.units = {};
+
+						// Convert returned array into object of objects
+						for (var i = units.length - 1; i >= 0; i--) {
+							var currentKey = Object.keys(units[i])[0];
+
+							$scope.units[currentKey] = units[i][currentKey];
+						}
+
+						// Hide spinner
+						$scope.loading = false;
+					});
+				}
 			});
 
 			// Get the viewerModels data

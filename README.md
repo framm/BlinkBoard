@@ -10,8 +10,6 @@ BlinkBoard is a lightweight administration platform for web-based dashboards. Im
 In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.com/) as its database, but doesn't make use of the realtime-API, so it could be changed to use any sort of database without too much work. The platform runs as a Node.js server, so along with the before mentioned monitor and Raspberry Pi, you do need a server as well. Other than that, you just need the usual NPM and Bower to install and run the platform.
 
 ### Installation
-####(Not ready for installation yet - stop!)
-
 Having cloned the repository, cd into the `BlinkBoard` directory and run `npm install`. Then cd into the `public` directory and run `bower install`. Now you need to create a [FireBase](https://www.firebase.com/) account. Having created an *app*, you need to enable email-authentication and create a user. When finished you have the information needed in order to setup the environment variables. Create a file called `.env` in the root 'BlinkBoard' directory and fill it out as follows:
 ```
 FIREBASE_URL=[insert Firebase url (e.g. https://myapp.firebaseio.com/)]
@@ -23,6 +21,8 @@ DEV_PASSWORD=[insert your password]
 The `DEV_USER` and `DEV_PASSWORD` are only there for convenience while testing so you don't have to retype these when you log in. When ready for production, you should remove these and change the login page code to reflect it.
 
 Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the *How to Use* section below. Now you should be able to run the server using the command `gulp`.
+
+There is currently no custom user-management, so just use FireBase' online controlpanel for now.
 
 ### How to Use
 The structure of BlinkBoard consists of 3 objects:
