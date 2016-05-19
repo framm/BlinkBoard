@@ -3,15 +3,11 @@
 		<div class="md-list-item-text">
 			<h3>{{unit.name}}</h3>
 			<p ng-if="!unit.viewers">0 viewers</p>
-			<p ng-repeat="viewer in unit.viewers">
-				<span ng-if="$last">{{$index + 1}} viewer<span ng-if="$index == 1"></span><span ng-if="$index > 0">s</span></span>
+			<p ng-repeat="viewer in unit.viewers"> <span ng-if="$last">{{$index + 1}} viewer<span ng-if="$index == 1"></span><span ng-if="$index > 0">s</span></span>
 			</p>
 		</div>
-		<button class="md-button md-secondary md-accent" ng-click="$state.go('dashboard.unit', { unitID: unitID })">
-			Manage
-			<md-tooltip md-direction="left" hide-xs>
-				Manage {{unit.name}}
-			</md-tooltip>
+		<button class="md-button md-secondary md-accent" ng-click="$state.go('dashboard.unit', { unitID: unitID })"> Manage
+			<md-tooltip md-direction="left" hide-xs> Manage {{unit.name}} </md-tooltip>
 		</button>
 		<md-divider></md-divider>
 	</md-list-item>
@@ -21,9 +17,7 @@
 		<md-fab-trigger>
 			<button class="md-button md-fab md-primary" ng-click="addUnit()">
 				<md-icon class="name button-icon material-icons">add</md-icon>
-				<md-tooltip md-direction="left" hide-xs>
-					Add New Unit
-				</md-tooltip>
+				<md-tooltip md-direction="left" hide-xs> Add New Unit </md-tooltip>
 			</button>
 		</md-fab-trigger>
 	</md-fab-speed-dial>

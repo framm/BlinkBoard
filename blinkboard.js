@@ -1,7 +1,8 @@
 "use strict";
 
 /********** .env **********/
-require('dotenv').config();
+require('dotenv')
+	.config();
 
 /********** Node Modules **********/
 var express = require('express');
@@ -28,50 +29,53 @@ blinkboard.use(bodyParser.urlencoded());
 blinkboard.use(express.static(path.join(__dirname, 'public')));
 
 // blinkboards
-blinkboard.get('/', function(req, res) {
+blinkboard.get('/', function (req, res) {
 	// Get array of viewer types
 	request({
 		url: process.env.FIREBASE_URL + 'viewerModels.json',
 		method: 'GET'
-	}, function(error, response, body) {
+	}, function (error, response, body) {
 		if (error) {
 			console.log(error);
 		} else {
 			// Provide array of viewer types to the render function
-			res.render('unit', { viewerTypes: _.keys(JSON.parse(body)) });
+			res.render('unit', {
+				viewerTypes: _.keys(JSON.parse(body))
+			});
 		}
 	});
 });
 
-blinkboard.get('/management', function(req, res) {
+blinkboard.get('/management', function (req, res) {
 	res.render('management');
 });
 
-blinkboard.get('/setid', function(req, res) {
+blinkboard.get('/setid', function (req, res) {
 	res.render('setID');
 });
 
-blinkboard.get('/generateid', function(req, res) {
+blinkboard.get('/generateid', function (req, res) {
 	// Send generated UUID
-	res.send(uuid.v1().toUpperCase());
+	res.send(uuid.v1()
+		.toUpperCase());
 });
 
 
 // Data
-blinkboard.post('/stockviewer.getData', function(req, res) {
+blinkboard.post('/stockviewer.getData', function (req, res) {
 	stockviewer.getData(req, res);
 });
 
-blinkboard.post('/currencyviewer.getData', function(req, res) {
+blinkboard.post('/currencyviewer.getData', function (req, res) {
 	currencyviewer.getData(req, res);
 });
 
-blinkboard.post('/rssviewer.getData', function(req, res) {
+blinkboard.post('/rssviewer.getData', function (req, res) {
 	rssviewer.getData(req, res);
 });
 
 // Initialization
-blinkboard.listen(process.env.PORT, function() {
+blinkboard.listen(process.env.PORT, function () {
 	console.log('Listening on port ' + process.env.PORT);
 });
 

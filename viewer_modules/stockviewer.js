@@ -6,11 +6,11 @@ var fs = require('fs');
 
 // Visible object
 module.exports = {
-	getData: function(req, res) {
+	getData: function (req, res) {
 		request({
 			url: 'http://dev.markitondemand.com/MODApis/Api/v2/Quote/json?symbol=' + req.body.symbol,
 			method: 'POST'
-		}, function(error, response, body) {
+		}, function (error, response, body) {
 			if (error) {
 				console.log(error);
 			} else {
@@ -19,16 +19,20 @@ module.exports = {
 				var stockData = {}; // Construct object for changed info
 
 				// Iterate data's properties
-				_.forIn(data, function(value, property) {
+				_.forIn(data, function (value, property) {
 					if (property === 'LastPrice') { // Set 2 decimals
-						value = parseFloat(value).toFixed(2);
+						value = parseFloat(value)
+							.toFixed(2);
 					}
 
 					if (property === 'ChangePercent') { // Set 2 decimals
-						value = parseFloat(value).toFixed(2);
+						value = parseFloat(value)
+							.toFixed(2);
 					}
 
-					stockData[property] = { "value": value };
+					stockData[property] = {
+						"value": value
+					};
 				});
 
 				res.send(stockData);

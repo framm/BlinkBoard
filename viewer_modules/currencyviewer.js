@@ -14,7 +14,7 @@ function getCurrencyData() {
 		request({
 			url: 'https://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json',
 			method: 'GET'
-		}, function(error, response, body) {
+		}, function (error, response, body) {
 			if (error) {
 				console.log(error);
 			} else {
@@ -57,14 +57,14 @@ getCurrencyData();
 var rule = new schedule.RecurrenceRule();
 rule.second = [1, 21, 41];
 
-var j = schedule.scheduleJob(rule, function() {
+var j = schedule.scheduleJob(rule, function () {
 	getCurrencyData();
 });
 
 
 // Visible object
 module.exports = {
-	getData: function(req, res) {
+	getData: function (req, res) {
 		// Format currency-symbols to fit the flags on the client
 		function formatToFlag(string) {
 			string = string.substring(0, string.length - 1);
@@ -98,11 +98,14 @@ module.exports = {
 
 
 			// Limit decimals
-			object.rate = parseFloat(object.rate).toFixed(4);
+			object.rate = parseFloat(object.rate)
+				.toFixed(4);
 
 			// Iterate data's properties to add room for 'changed' variables
-			_.forIn(object, function(value, property) {
-				object[property] = { "value": value };
+			_.forIn(object, function (value, property) {
+				object[property] = {
+					"value": value
+				};
 			});
 
 			res.send(object);

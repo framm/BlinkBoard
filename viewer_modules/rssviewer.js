@@ -7,9 +7,9 @@ var feed = require("feed-read");
 
 // Visible object
 module.exports = {
-	getData: function(req, res) {
+	getData: function (req, res) {
 		try {
-			feed(req.body.url, function(error, articles) {
+			feed(req.body.url, function (error, articles) {
 				if (error) {
 					console.log(error);
 				} else {
@@ -30,7 +30,7 @@ module.exports = {
 					}
 
 					// Sort by published
-					RSSfeed.value.sort(function(a, b) {
+					RSSfeed.value.sort(function (a, b) {
 						return b.published - a.published;
 					});
 

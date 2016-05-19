@@ -1,7 +1,7 @@
 "use strict";
 
 bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$interval', 'lodash',
-	function($scope, $timeout, $http, $interval, lodash) {
+	function ($scope, $timeout, $http, $interval, lodash) {
 
 		// Check if all configuration values are defined
 		if ($scope.data.configuration.updatefrequency === undefined) {
@@ -47,8 +47,12 @@ bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$inter
 		function formatPublished(feed) {
 			for (var i = feed.value.length - 1; i >= 0; i--) {
 				var publishedObject = {
-					timeAgo: moment(feed.value[i].published).local().fromNow(),
-					time: moment(feed.value[i].published).local().format('HH:mm')
+					timeAgo: moment(feed.value[i].published)
+						.local()
+						.fromNow(),
+					time: moment(feed.value[i].published)
+						.local()
+						.format('HH:mm')
 				}
 
 				feed.value[i].published = publishedObject;
@@ -61,43 +65,49 @@ bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$inter
 		$scope.url = '/rssviewer.getData';
 
 		// Get initial data
-		$http.post($scope.url, { 'url': $scope.data.configuration.url }).then(function(data, status, headers, config) {
-			// Save data for raw comparison
-			$scope.rawData = data.data;
+		$http.post($scope.url, {
+				'url': $scope.data.configuration.url
+			})
+			.then(function (data, status, headers, config) {
+				// Save data for raw comparison
+				$scope.rawData = data.data;
 
-			// Set number of articles and format published parameters
-			$scope.rssData = formatPublished(setNumberOfStories(angular.copy(data.data)));
-		});
+				// Set number of articles and format published parameters
+				$scope.rssData = formatPublished(setNumberOfStories(angular.copy(data.data)));
+			});
 
 		// Function to get data
 		function getData() {
-			$http.post($scope.url, { 'url': $scope.data.configuration.url }).then(function(data, status, headers, config) {
-				// Only check for changes if existing data exists
-				if ($scope.rawData !== undefined) {
-					// Check and set changed values
-					$scope.rssDataChanged = setChanged($scope.rawData, data.data);
+			$http.post($scope.url, {
+					'url': $scope.data.configuration.url
+				})
+				.then(function (data, status, headers, config) {
+					// Only check for changes if existing data exists
+					if ($scope.rawData !== undefined) {
+						// Check and set changed values
+						$scope.rssDataChanged = setChanged($scope.rawData, data.data);
 
-					$timeout(function() {
-						// Save data for raw comparison
-						$scope.rawData = data.data;
+						$timeout(function () {
+							// Save data for raw comparison
+							$scope.rawData = data.data;
 
-						// Set number of articles and format published parameters
-						$scope.rssData = formatPublished(setNumberOfStories(angular.copy(data.data)));
+							// Set number of articles and format published parameters
+							$scope.rssData = formatPublished(setNumberOfStories(angular.copy(data.data)));
 
-						$timeout(function() {
-							// Reset changed info
-							$scope.rssDataChanged = null;
+							$timeout(function () {
+								// Reset changed info
+								$scope.rssDataChanged = null;
+							}, 2500);
 						}, 2500);
-					}, 2500);
-				}
-			});
+					}
+				});
 		}
 
 		// $interval to refresh data
 		var interval = $interval(getData, ($scope.data.configuration.updatefrequency * 1000));
 
 		// Watch for updatefrequency changes ($interval has to be canceled and then recreated each time)
-		$scope.$watch("data.configuration.updatefrequency", function() {
+		$scope.$watch("data.configuration.updatefrequency", function () {
 			// Cancel existing interval
 			$interval.cancel(interval);
 
@@ -111,7 +121,7 @@ bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$inter
 ]);
 
 // Stockviewer directive
-bbUnit.directive('rssviewer', function() {
+bbUnit.directive('rssviewer', function () {
 	return {
 		controller: 'RSSviewerController',
 		templateUrl: '/viewers/rssviewer/rssviewer.html',

@@ -1,15 +1,13 @@
-/*===============================
-=            Imports            =
-===============================*/
-
+/*=============================================>>>>>
+= Imports =
+===============================================>>>>>*/
 @import "mixins";
 
-/*========================================
-=            Z-Index overview            =
-========================================*/
+/*=============================================>>>>>
+= Z-Index overview =
+===============================================>>>>>*/
 
-$zIndexToolbar: 2;
-// md-scroll-mask: 50
+$zIndexToolbar: 2; // md-scroll-mask: 50
 // md-scroll-mask-bar: 65
 // Viewers (set in the DOM): 200-249
 $zIndexMdFab: 250;
@@ -20,23 +18,20 @@ $zIndexSelectMenuContainer: 301;
 $zIndexMdTooltip: 309;
 $zIndexSpinner: 310;
 
-/*==============================
-=            Colors            =
-==============================*/
-
+/*=============================================>>>>>
+= Colors =
+===============================================>>>>>*/
 $primary: #212121;
 $accent: #3F51B5;
 $warn: #BF360C;
 $grey: rgba(100, 100, 100, 0.5);
 $lightGrey: rgba(100, 100, 100, 0.1);
 
-/*==============================
-=            Styles            =
-==============================*/
-
+/*=============================================>>>>>
+= Styles =
+===============================================>>>>>*/
 
 /*----------  Global tweaks to Angular Material  ----------*/
-
 .md-fab-action-item {
 	z-index: $zIndexMdFabActionItem;
 }
@@ -52,8 +47,8 @@ md-tooltip {
 	z-index: $zIndexMdTooltip;
 }
 
-md-dialog,
-md-backdrop.md-dialog-backdrop {
+md-backdrop.md-dialog-backdrop,
+md-dialog {
 	z-index: $zIndexMdDialogBackdrop;
 }
 
@@ -63,6 +58,7 @@ md-list {
 
 .md-dialog-container {
 	z-index: $zIndexDialogueContainer;
+
 	md-dialog {
 		width: 95%;
 		max-width: 24rem;
@@ -72,10 +68,7 @@ md-list {
 .md-select-menu-container {
 	z-index: $zIndexSelectMenuContainer;
 }
-
-
 /*----------  Tiny addon classes  ----------*/
-
 .grey {
 	color: $grey;
 }
@@ -87,12 +80,15 @@ md-list {
 		@include transition(0.5s ease-in-out);
 		opacity: 0;
 	}
+
 	.ng-enter-active {
 		opacity: 1;
 	}
+
 	.ng-leave {
 		opacity: 1;
 	}
+
 	.ng-leave-active {
 		opacity: 0;
 	}
@@ -103,9 +99,11 @@ md-list {
 		z-index: $zIndexToolbar;
 		background-color: $primary;
 	}
+
 	.md-toolbar-tools {
 		padding: 0 1rem 0 0.3rem; // Fixing the spacing for the specific icons, I'm using
 	}
+
 	md-menu-bar {
 		padding: 0;
 	}
@@ -124,9 +122,9 @@ md-list {
 		margin: auto;
 		width: 100%;
 		max-width: 80rem;
+
 		#login {
-			margin: auto;
-			margin-top: 3rem;
+			margin: 3rem auto auto;
 			width: 90%;
 			max-width: 24rem;
 		}
@@ -135,18 +133,21 @@ md-list {
 			.header {
 				h3 {
 					font-size: 1rem;
-					margin-top: 0rem;
+					margin-top: 0;
 					margin-bottom: 0.5rem;
 				}
+
 				h2 {
 					margin-top: 0.5rem;
 					margin-bottom: 0.5rem;
 				}
+
 				.buttons {
 					height: 100%;
 				}
 			}
 			$gridFontSize: 0.9rem;
+
 			#grid {
 				font-weight: bold;
 				position: relative;
@@ -154,6 +155,7 @@ md-list {
 				font-size: $gridFontSize;
 				margin-bottom: 1rem;
 				background-color: $lightGrey;
+
 				.viewer {
 					display: flex;
 					align-items: center;

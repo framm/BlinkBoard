@@ -1,15 +1,15 @@
-/*===============================
-=            Imports            =
-===============================*/
-/*========================================
-=            Z-Index overview            =
-========================================*/
-/*==============================
-=            Colors            =
-==============================*/
-/*==============================
-=            Styles            =
-==============================*/
+/*=============================================>>>>>
+= Imports =
+===============================================>>>>>*/
+/*=============================================>>>>>
+= Z-Index overview =
+===============================================>>>>>*/
+/*=============================================>>>>>
+= Colors =
+===============================================>>>>>*/
+/*=============================================>>>>>
+= Styles =
+===============================================>>>>>*/
 /*----------  Global tweaks to Angular Material  ----------*/
 .md-fab-action-item {
   z-index: 252; }
@@ -23,8 +23,8 @@ md-fab-speed-dial {
 md-tooltip {
   z-index: 309; }
 
-md-dialog,
-md-backdrop.md-dialog-backdrop {
+md-backdrop.md-dialog-backdrop,
+md-dialog {
   z-index: 260; }
 
 md-list {
@@ -86,13 +86,12 @@ md-list {
     max-width: 80rem;
     /*----------  'dashboard.unit' state  ----------*/ }
     #management #view #login {
-      margin: auto;
-      margin-top: 3rem;
+      margin: 3rem auto auto;
       width: 90%;
       max-width: 24rem; }
     #management #view #unit .header h3 {
       font-size: 1rem;
-      margin-top: 0rem;
+      margin-top: 0;
       margin-bottom: 0.5rem; }
     #management #view #unit .header h2 {
       margin-top: 0.5rem;
