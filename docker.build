@@ -1,0 +1,12 @@
+FROM node:argon
+
+# Create app directory
+RUN mkdir -p /usr/src/BlinkBoard
+WORKDIR /usr/src/BlinkBoard
+
+# Copy and app
+COPY / /usr/src/BlinkBoard/
+
+EXPOSE 7331
+
+CMD [ "node", "blinkboard" ]
