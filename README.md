@@ -1,4 +1,4 @@
-# BlinkBoard
+# BlinkBoard (beta)
 
 ## Web-based Dashboard Platform
 
