@@ -14,7 +14,12 @@ module.exports = {
 			if (error) {
 				console.log(error);
 			} else {
-				var data = JSON.parse(body); // Parse data
+				// Parse data
+				try {
+					var data = JSON.parse(body);
+				} catch (error) {
+					console.log(error);
+				}
 
 				var stockData = {}; // Construct object for changed info
 

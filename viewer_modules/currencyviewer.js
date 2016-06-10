@@ -19,7 +19,11 @@ function getCurrencyData() {
 				console.log(error);
 			} else {
 				// Parse data
-				var tempDataObject = JSON.parse(body);
+				try {
+					var tempDataObject = JSON.parse(body);
+				} catch (error) {
+					console.log(error);
+				}
 
 				// Strip useless data
 				tempDataObject = tempDataObject.list.resources;
