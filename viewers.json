@@ -25,7 +25,7 @@
 			"parameters": {
 				"stories": "^[1-9]*$",
 				"updatefrequency": "^[1-9]\\d{1,}$",
-				"url": "^(http).*//[a-z]+\\..*$"
+				"url": "^(http).*$"
 			},
 			"size": {
 				"height": "300",
