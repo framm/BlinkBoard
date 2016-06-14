@@ -42,7 +42,7 @@ module.exports = {
 
 				res.send(stockData);
 
-				console.log(Date.now(), 'got stock data');
+				//console.log(Date.now(), 'got stock data');
 			}
 		});
 	}

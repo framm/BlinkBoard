@@ -114,7 +114,7 @@ module.exports = {
 
 			res.send(object);
 
-			console.log(Date.now(), 'updated currency data');
+			//console.log(Date.now(), 'updated currency data');
 		} catch (error) {
 			console.log(error);
 		}

@@ -36,7 +36,7 @@ module.exports = {
 
 					res.send(RSSfeed);
 
-					console.log(Date.now(), 'got RSS data');
+					//console.log(Date.now(), 'got RSS data');
 				}
 			});
 		} catch (error) {

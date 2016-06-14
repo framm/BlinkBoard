@@ -28,7 +28,7 @@ gulp.task('styling', function () {
 gulp.task('viewerStyling', function () {
 	console.log('Compiling viewer sass and reloading client');
 
-	var viewers = ['currencyviewer', 'rssviewer', 'stockviewer'];
+	var viewers = ['currencyviewer', 'rssviewer', 'stockviewer', 'iframeviewer'];
 
 	for (var i = viewers.length - 1; i >= 0; i--) {
 		gulp.src(viewerStyling + viewers[i] + '/' + viewers[i] + '.scss')

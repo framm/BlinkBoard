@@ -46,6 +46,10 @@ blinkboard.get('/', function (req, res) {
 	});
 });
 
+blinkboard.get('/blank', function (req, res) {
+	res.render('blank');
+});
+
 blinkboard.get('/management', function (req, res) {
 	res.render('management');
 });
