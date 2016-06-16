@@ -475,5 +475,27 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 				}
 			});
 		}
+
+		$scope.listViewers = function () {
+			$mdDialog.show({
+				templateUrl: 'templates/dialogues/listViewers.html',
+				hasBackdrop: true,
+				clickOutsideToClose: true,
+				controller: function (scope, $mdDialog) {
+					// Make a copy of the current unit-object available to the service
+					scope.unit = angular.copy($scope.units[$state.params.unitID]);
+
+					scope.goToViewer = function (name) {
+						$mdDialog.cancel();
+
+						$scope.viewerSettings(name);
+					}
+
+					scope.close = function () {
+						$mdDialog.cancel();
+					}
+				}
+			});
+		}
 	}
 ]);
