@@ -25,7 +25,9 @@ blinkboard.set('views', path.join(__dirname, 'views'));
 blinkboard.set('view engine', 'ejs');
 
 blinkboard.use(bodyParser.json());
-blinkboard.use(bodyParser.urlencoded());
+blinkboard.use(bodyParser.urlencoded({
+	extended: true
+}));
 blinkboard.use(express.static(path.join(__dirname, 'public')));
 
 // blinkboards
