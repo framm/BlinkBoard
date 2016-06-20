@@ -11,7 +11,7 @@
 		<!--<link rel="apple-touch-icon" href="/images/icon.png" />-->
 		<!-- External ressources -->
 		<link rel="stylesheet" href="/bower_components/normalize-css/normalize.css"/>
-		<link rel="stylesheet" href="/bower_components/roboto-fontface/css/roboto-fontface.css"/>
+		<link rel="stylesheet" href="/bower_components/roboto-fontface/css/roboto/roboto-fontface.css"/>
 		<link rel="stylesheet" href="/bower_components/material-design-icons/iconfont/material-icons.css"/>
 		<link rel="stylesheet" href="/bower_components/angular-material/angular-material.min.css"/>
 		<script src="/bower_components/angular/angular.min.js"></script>
@@ -21,14 +21,16 @@
 		<script src="/bower_components/angular-messages/angular-messages.min.js"></script>
 		<script src="/bower_components/angular-material/angular-material.min.js"></script>
 		<script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
-		<script src="/bower_components/firebase/firebase-debug.js"></script>
+		<script src="/bower_components/firebase/firebase.js"></script>
 		<!-- Stuff I've written -->
 		<link rel="stylesheet" href="sass/management.css" type="text/css"/>
 		<script src="javascripts/management.js"></script>
 		<!-- environment -->
 		<script>
 			var env = {
-				FIREBASE_URL: '<%= process.env.FIREBASE_URL %>',
+				FIREBASE_APIKEY: '<%= process.env.FIREBASE_APIKEY %>',
+				FIREBASE_AUTHDOMAIN: '<%= process.env.FIREBASE_AUTHDOMAIN %>',
+				FIREBASE_DATABASEURL: '<%= process.env.FIREBASE_DATABASEURL %>',
 				DEV_USER: '<%= process.env.DEV_USER %>',
 				DEV_PASSWORD: '<%= process.env.DEV_PASSWORD %>'
 			}

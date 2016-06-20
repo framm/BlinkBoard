@@ -10,11 +10,11 @@
 		<meta name="format-detection" content="telephone=no"/>
 		<!-- external ressources -->
 		<link rel="stylesheet" href="/bower_components/normalize-css/normalize.css">
-		<link rel="stylesheet" href="/bower_components/roboto-fontface/css/roboto-fontface.css">
+		<link rel="stylesheet" href="/bower_components/roboto-fontface/css/roboto/roboto-fontface.css">
 		<link rel="stylesheet" href="/bower_components/flag-icon-css/css/flag-icon.min.css">
 		<script src="/bower_components/angular/angular.min.js"></script>
 		<script src="/bower_components/angularfire/dist/angularfire.min.js"></script>
-		<script src="/bower_components/firebase/firebase-debug.js"></script>
+		<script src="/bower_components/firebase/firebase.js"></script>
 		<script src="/bower_components/ng-lodash/build/ng-lodash.min.js"></script>
 		<script src="/bower_components/moment/min/moment.min.js"></script>
 		<!-- unit -->
@@ -28,7 +28,9 @@
 		<!-- environment -->
 		<script>
 			var env = {
-				FIREBASE_URL: '<%= process.env.FIREBASE_URL %>'
+				FIREBASE_APIKEY: '<%= process.env.FIREBASE_APIKEY %>',
+				FIREBASE_AUTHDOMAIN: '<%= process.env.FIREBASE_AUTHDOMAIN %>',
+				FIREBASE_DATABASEURL: '<%= process.env.FIREBASE_DATABASEURL %>'
 			}
 		</script>
 	</head>

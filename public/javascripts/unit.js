@@ -10,14 +10,18 @@ var bbUnit = angular.module('bbUnit', ['firebase', 'ngLodash']);
 bbUnit.controller('UnitController', ['$scope', '$firebaseObject', '$compile',
 	function ($scope, $firebaseObject, $compile) {
 
-		// Firebase
-		var firebase = new Firebase(env.FIREBASE_URL + 'units/');
-
 		// Make unitID available
 		$scope.unitID = localStorage.getItem('unitID');
 
 		// Firebase for this specific unit
-		var firebaseUnit = new Firebase(env.FIREBASE_URL + 'units/' + $scope.unitID + '/');
+		firebase.initializeApp({
+			apiKey: env.FIREBASE_APIKEY,
+			authDomain: env.FIREBASE_AUTHDOMAIN,
+			databaseURL: env.FIREBASE_DATABASEURL
+		});
+
+		var firebaseUnit = firebase.database()
+			.ref('units/' + $scope.unitID + '/');
 
 		// Bind the unit data to the $scope
 		var fireObject = $firebaseObject(firebaseUnit);

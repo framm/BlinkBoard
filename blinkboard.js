@@ -34,7 +34,7 @@ blinkboard.use(express.static(path.join(__dirname, 'public')));
 blinkboard.get('/', function (req, res) {
 	// Get array of viewer types
 	request({
-		url: process.env.FIREBASE_URL + 'viewerModels.json',
+		url: process.env.FIREBASE_DATABASEURL + 'viewerModels.json',
 		method: 'GET'
 	}, function (error, response, body) {
 		if (error) {
