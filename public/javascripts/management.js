@@ -72,9 +72,13 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 		});
 
 		// Get all data
-		function getData(firebaseUserRef) {
+		function getData() {
 			// Show spinner
 			$scope.loading = true;
+
+			// Get data with the authorized uid
+			var firebaseUserRef = firebase.database()
+				.ref('users/' + $scope.uid + '/');
 
 			// Get user/unit data
 			firebaseUserRef.once("value", function (user) {
@@ -158,11 +162,10 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 					// If authorized
 					console.log('authorized', user.uid);
 
-					// Get data with the authorized uid
-					var firebaseUserRef = firebase.database()
-						.ref('users/' + user.uid + '/');
+					// Expose UID
+					$scope.uid = user.uid;
 
-					getData(firebaseUserRef);
+					getData();
 
 					// Go to dashboard state if coming from login state
 					if ($scope.$state.current.name === 'login') {
@@ -173,8 +176,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 					console.log('not authorized');
 
 					// Clean $scope
-					$scope.user = null;
 					$scope.viewerModels = null;
+					$scope.uid = null;
 
 					// Go to login state
 					$state.go('login');
@@ -244,13 +247,14 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 					scope.save = function (updatedUnit) {
 						// Make connection to /units
-						var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + $state.params.unitID + '/');
+						var firebaseUnitRef = firebase.database()
+							.ref('units/' + $state.params.unitID + '/');
 
 						// Save new unit to /units
 						firebaseUnitRef.set(updatedUnit)
 							.then(function () {
 								// Refresh data
-								getData(authService.firebaseUserRef);
+								getData();
 
 								// Close dialogue
 								$mdDialog.cancel();
@@ -263,12 +267,15 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 					scope.delete = function () {
 						// Remove unit from /users
-						authService.firebaseUserRef.child('units')
+						var firebaseUserRef = firebase.database()
+							.ref('users/' + $scope.uid + '/');
+
+						firebaseUserRef.child('units')
 							.child($state.params.unitID)
 							.remove()
 							.then(function () {
 								// Refresh data
-								getData(authService.firebaseUserRef);
+								getData();
 
 								// Close dialogue
 								$mdDialog.cancel();
@@ -300,12 +307,16 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 						};
 
 						// Save unit to /users
-						authService.firebaseUserRef.child('units')
+						var firebaseUserRef = firebase.database()
+							.ref('users/' + $scope.uid + '/');
+
+						firebaseUserRef.child('units')
 							.child(id)
 							.set('undefined')
 							.then(function () {
 								// Make connection to /units
-								var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + id + '/');
+								var firebaseUnitRef = firebase.database()
+									.ref('units/' + id + '/');
 
 								// Check if unitID already exists (has been previously created)
 								firebaseUnitRef.once("value", function (unit) {
@@ -315,7 +326,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 										firebaseUnitRef.set(newUnit)
 											.then(function () {
 												// Refresh data
-												getData(authService.firebaseUserRef);
+												getData();
 
 												// Close dialogue
 												$mdDialog.cancel();
@@ -323,7 +334,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 									} else {
 										// Did exists
 										// Refresh data
-										getData(authService.firebaseUserRef);
+										getData();
 
 										// Close dialogue
 										$mdDialog.cancel();
@@ -364,7 +375,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 					scope.save = function (updatedViewer) {
 						// Make connection to /units
-						var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + $state.params.unitID + '/');
+						var firebaseUnitRef = firebase.database()
+							.ref('units/' + $state.params.unitID + '/');
 
 						// Save viewer to /units
 						firebaseUnitRef.child('viewers')
@@ -372,7 +384,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 							.set(updatedViewer)
 							.then(function () {
 								// Refresh data
-								getData(authService.firebaseUserRef);
+								getData();
 
 								// Close dialogue
 								$mdDialog.cancel();
@@ -385,7 +397,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 					scope.delete = function () {
 						// Make connection to /units
-						var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + $state.params.unitID + '/');
+						var firebaseUnitRef = firebase.database()
+							.ref('units/' + $state.params.unitID + '/');
 
 						// Remove viewer from /units
 						firebaseUnitRef.child('viewers')
@@ -393,7 +406,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 							.remove()
 							.then(function () {
 								// Refresh data
-								getData(authService.firebaseUserRef);
+								getData();
 
 								// Close dialogue
 								$mdDialog.cancel();
@@ -428,7 +441,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 						};
 
 						// Make connection to /units
-						var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + $state.params.unitID + '/');
+						var firebaseUnitRef = firebase.database()
+							.ref('units/' + $state.params.unitID + '/');
 
 						// Save new viewer to /units
 						firebaseUnitRef.child('viewers')
@@ -436,7 +450,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 							.set(newViewer)
 							.then(function () {
 								// Refresh data
-								getData(authService.firebaseUserRef);
+								getData();
 
 								// Close dialogue
 								$mdDialog.cancel();
