@@ -20,42 +20,6 @@ bbManagement.config(function ($mdThemingProvider) {
 		});
 });
 
-
-/*=============================================>>>>>
-= Authentication service =
-===============================================>>>>>*/
-
-bbManagement.factory('authService', function ($firebaseObject, $q) {
-	var authService = {};
-
-	// Firebase URL
-	authService.firebaseUserRef = new Firebase(env.FIREBASE_URL);
-
-	authService.authenticate = function (email, password) {
-		return $q(function (resolve, reject) {
-			authService.firebaseUserRef.authWithPassword({
-				email: email,
-				password: password
-			}, function (error, authData) {
-				if (error) {
-					reject(error);
-				} else {
-					authService.firebaseUserRef = new Firebase(env.FIREBASE_URL + 'users/' + authData.auth.uid + '/');
-					// Return authenticated firebase object
-					resolve(authService.firebaseUserRef);
-				}
-			});
-		});
-	}
-
-	authService.unauthenticate = function () {
-		authService.firebaseUserRef.unauth();
-	}
-
-	return authService;
-});
-
-
 /*=============================================>>>>>
 = UI-Router =
 ===============================================>>>>>*/
@@ -68,16 +32,14 @@ bbManagement.config(function ($stateProvider, $urlRouterProvider) {
 			data: {
 				title: "BlinkBoard"
 			},
-			templateUrl: 'ui-router/login.html',
-			authenticationRequired: false
+			templateUrl: 'ui-router/login.html'
 		})
 		.state('dashboard', {
 			url: '/dashboard',
 			data: {
 				title: "Dashboard"
 			},
-			templateUrl: 'ui-router/dashboard.html',
-			authenticationRequired: true
+			templateUrl: 'ui-router/dashboard.html'
 		})
 		.state('dashboard.unit', {
 			url: '/:unitID',
@@ -88,8 +50,7 @@ bbManagement.config(function ($stateProvider, $urlRouterProvider) {
 				"@": {
 					templateUrl: 'ui-router/dashboard.unit.html'
 				}
-			},
-			authenticationRequired: true
+			}
 		});
 });
 
@@ -98,10 +59,17 @@ bbManagement.config(function ($stateProvider, $urlRouterProvider) {
 = Main Controller =
 ===============================================>>>>>*/
 
-bbManagement.controller('ManagementController', ['$scope', '$location', '$state', '$timeout', '$http', '$firebaseObject', '$mdDialog', '$mdMedia', '$mdToast', 'authService', '$q',
-	function ($scope, $location, $state, $timeout, $http, $firebaseObject, $mdDialog, $mdMedia, $mdToast, authService, $q) {
+bbManagement.controller('ManagementController', ['$scope', '$location', '$state', '$timeout', '$http', '$firebaseObject', '$mdDialog', '$mdMedia', '$mdToast', '$firebaseAuth', '$q',
+	function ($scope, $location, $state, $timeout, $http, $firebaseObject, $mdDialog, $mdMedia, $mdToast, $firebaseAuth, $q) {
 
 		/*----------- Data -----------*/
+
+		// Firebase connection
+		firebase.initializeApp({
+			apiKey: env.FIREBASE_APIKEY,
+			authDomain: env.FIREBASE_AUTHDOMAIN,
+			databaseURL: env.FIREBASE_DATABASEURL
+		});
 
 		// Get all data
 		function getData(firebaseUserRef) {
@@ -130,7 +98,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 							var unitPromise = $q.defer();
 
 							// Connection to specific unit
-							var firebaseUnitRef = new Firebase(env.FIREBASE_URL + 'units/' + unitID + '/');
+							var firebaseUnitRef = firebase.database()
+								.ref('units/' + unitID + '/');
 
 							firebaseUnitRef.once("value", function (unit) {
 								// Construct corrctly formattet unit object
@@ -165,7 +134,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 			});
 
 			// Get the viewerModels data
-			var firebaseViewerModelsRef = new Firebase(env.FIREBASE_URL + 'viewerModels/');
+			var firebaseViewerModelsRef = firebase.database()
+				.ref('viewerModels/');
 
 			firebaseViewerModelsRef.once("value", function (viewerModels) {
 				$scope.viewerModels = viewerModels.val();
@@ -179,16 +149,37 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 			});
 		}
 
-		// Get data if authorized and $scope is empty
-		if ((authService.firebaseUserRef.getAuth() !== null) && ($scope.user === undefined)) { // If logged in
-			console.log('already authorized');
+		// Listen for authorization changes
+		$firebaseAuth()
+			.$onAuthStateChanged(function (user) {
+				console.log('auth state changed');
 
-			// Get data with the authorized uid
-			authService.firebaseUserRef = new Firebase(env.FIREBASE_URL + 'users/' + authService.firebaseUserRef.getAuth()
-				.auth.uid + "/");
+				if (user) {
+					// If authorized
+					console.log('authorized', user.uid);
 
-			getData(authService.firebaseUserRef);
-		}
+					// Get data with the authorized uid
+					var firebaseUserRef = firebase.database()
+						.ref('users/' + user.uid + '/');
+
+					getData(firebaseUserRef);
+
+					// Go to dashboard state if coming from login state
+					if ($scope.$state.current.name === 'login') {
+						$state.go('dashboard');
+					}
+				} else {
+					// If not authorized
+					console.log('not authorized');
+
+					// Clean $scope
+					$scope.user = null;
+					$scope.viewerModels = null;
+
+					// Go to login state
+					$state.go('login');
+				}
+			});
 
 
 		/*----------- Log in/out functions -----------*/
@@ -205,13 +196,9 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 			$scope.loading = true;
 
 			// Authenticate and get data
-			authService.authenticate(email, password)
-				.then(function (firebaseUserRef) {
-					getData(firebaseUserRef);
-
-					// Go to dashboard state
-					$state.go('dashboard');
-				})['catch'](function (error) {
+			$firebaseAuth()
+				.$signInWithEmailAndPassword(email, password)
+				.catch(function (error) {
 					$scope.loading = false;
 
 					alert(error);
@@ -221,14 +208,8 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 		// Log out
 		$scope.logout = function () {
 			// Unauthenticate
-			authService.unauthenticate();
-
-			// Clean $scope
-			$scope.user = null;
-			$scope.viewerModels = null;
-
-			// Go to login state
-			$state.go('login');
+			$firebaseAuth()
+				.$signOut();
 		}
 
 
@@ -240,13 +221,6 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 		$scope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 			// Close any dialogues
 			$mdDialog.cancel();
-
-			// Check if requested state requires authentication and if user is not authenticated
-			if ((toState.authenticationRequired === true) && (authService.firebaseUserRef.getAuth() === null)) {
-				// User isn’t authenticated; go to login state
-				$state.go('login');
-				event.preventDefault();
-			}
 		});
 
 		$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {

@@ -20,11 +20,11 @@ bbUnit.controller('UnitController', ['$scope', '$firebaseObject', '$compile',
 			databaseURL: env.FIREBASE_DATABASEURL
 		});
 
-		var firebaseUnit = firebase.database()
+		var firebaseUnitRef = firebase.database()
 			.ref('units/' + $scope.unitID + '/');
 
 		// Bind the unit data to the $scope
-		var fireObject = $firebaseObject(firebaseUnit);
+		var fireObject = $firebaseObject(firebaseUnitRef);
 		fireObject.$bindTo($scope, 'unit')
 			.then(function () {
 				console.log($scope.unit);
