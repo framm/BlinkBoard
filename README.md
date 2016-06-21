@@ -17,8 +17,9 @@ In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.co
 Having cloned the repository, cd into the `BlinkBoard` directory and run `npm install`. Then cd into the `public` directory and run `bower install`. Now you need to create a [FireBase](https://www.firebase.com/) account. Having created an _app_, you need to enable email-authentication and create a user. When finished you have the information needed in order to setup the environment variables. Create a file called `.env` in the root 'BlinkBoard' directory and fill it out as follows:
 
 ```
-FIREBASE_URL=[insert Firebase url (e.g. https://myapp.firebaseio.com/)]
-FIREBASE_APPSECRET=[insert Firebase app secret]
+FIREBASE_APIKEY=[insert Google project API key]
+FIREBASE_AUTHDOMAIN=[insert Firebase domain (e.g. myapp.firebaseio.com)]
+FIREBASE_DATABASEURL=[insert Firebase url (e.g. https://myapp.firebaseio.com/)]
 PORT=[insert the port you want to use (e.g. 80)]
 DEV_USER=[insert your user (e.g. user@mail.com)]
 DEV_PASSWORD=[insert your password]
