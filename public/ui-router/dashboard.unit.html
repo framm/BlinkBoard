@@ -12,8 +12,8 @@
 	</div>
 	<div id="grid" ng-style="{paddingBottom: 100 * (units[$state.params.unitID].size.height / units[$state.params.unitID].size.width) + '%'}">
 		<div class="viewer md-whiteframe-1dp" layout="column" layout-align="center center" ng-style="{zIndex: {{200 + $index}}, width: (100 / units[$state.params.unitID].size.width) * viewer.size.width + '%', height: (100 / units[$state.params.unitID].size.height) * viewer.size.height + '%', top: viewer.placement.y * (100 / units[$state.params.unitID].size.height) + '%', left: viewer.placement.x * (100 / units[$state.params.unitID].size.width) + '%'}"
-						ng-repeat="(name, viewer) in units[$state.params.unitID].viewers track by $index">
-			<button class="md-button md-accent" ng-click="viewerSettings(name)"> {{name}}
+						ng-repeat="(key, viewer) in units[$state.params.unitID].viewers track by $index">
+			<button class="md-button md-accent" ng-click="viewerSettings(key)"> {{viewer.configuration.name}}
 				<md-icon style="font-size: 1.3rem; margin: -0.15rem 0 0 0.1rem;">settings</md-icon>
 				<md-tooltip md-direction="right" hide-xs> Viewer Settings </md-tooltip>
 			</button>

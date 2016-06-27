@@ -12,7 +12,7 @@
 		<md-input-container ng-if="viewerData.type">
 			<label>Name</label>
 			<md-icon class="md-accent">label_outline</md-icon>
-			<input name="name" ng-required="true" placeholder="e.g. Apple Stock" ng-model="viewerData.name" />
+			<input name="name" ng-required="true" placeholder="e.g. Apple Stock" ng-model="viewerData.configuration.name" />
 			<div ng-messages="addViewerForm.name.$error">
 				<div ng-message="required">Please fill out this field</div>
 			</div>

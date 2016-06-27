@@ -362,15 +362,15 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 		/*----------- Viewer functions -----------*/
 
 		// Configure viewer
-		$scope.viewerSettings = function (name) {
+		$scope.viewerSettings = function (key) {
 			$mdDialog.show({
 				templateUrl: 'templates/dialogues/viewerSettings.html',
 				hasBackdrop: true,
 				clickOutsideToClose: true,
 				controller: function (scope, $mdDialog) {
-					// Make name, a copy of the viewer-object, and the viewerModels available to the service
-					scope.name = name;
-					scope.viewer = angular.copy($scope.units[$state.params.unitID].viewers[name]);
+					// Make key, a copy of the viewer-object, and the viewerModels available to the service
+					scope.key = key;
+					scope.viewer = angular.copy($scope.units[$state.params.unitID].viewers[key]);
 					scope.viewerModels = $scope.viewerModels;
 
 					scope.save = function (updatedViewer) {
@@ -380,7 +380,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 						// Save viewer to /units
 						firebaseUnitRef.child('viewers')
-							.child(name)
+							.child(key)
 							.set(updatedViewer)
 							.then(function () {
 								// Refresh data
@@ -402,7 +402,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 						// Remove viewer from /units
 						firebaseUnitRef.child('viewers')
-							.child(name)
+							.child(key)
 							.remove()
 							.then(function () {
 								// Refresh data
@@ -446,7 +446,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 						// Save new viewer to /units
 						firebaseUnitRef.child('viewers')
-							.child(viewerData.name)
+							.child(Date.now()) // use timestamp as key
 							.set(newViewer)
 							.then(function () {
 								// Refresh data
@@ -473,10 +473,10 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 					// Make a copy of the current unit-object available to the service
 					scope.unit = angular.copy($scope.units[$state.params.unitID]);
 
-					scope.goToViewer = function (name) {
+					scope.goToViewer = function (key) {
 						$mdDialog.cancel();
 
-						$scope.viewerSettings(name);
+						$scope.viewerSettings(key);
 					}
 
 					scope.close = function () {

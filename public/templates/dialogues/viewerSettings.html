@@ -1,8 +1,8 @@
 <md-dialog-content class="md-dialog-content input" ng-model="viewer">
-	<h2>{{name}} <span class="grey">{{viewer.type}}</span></h2>
+	<h2>{{viewer.configuration.name}} <span class="grey">{{viewer.type}}</span></h2>
 	<form name="viewerSettingsForm" layout="column" ng-submit="save(viewer)">
 		<div ng-repeat="(category, parameters) in viewer" layout="column" ng-if="category != 'type'">
-			<md-input-container ng-repeat="(parameter, value) in parameters">
+			<md-input-container ng-repeat="(parameter, value) in parameters" ng-if="category != 'name'">
 				<label>{{parameter}}</label>
 				<md-icon class="md-accent">settings</md-icon>
 				<input name="{{parameter}}" ng-value="viewer[category][parameter]" ng-model="viewer[category][parameter]" ng-required="true" ng-pattern="viewerModels[viewer.type].parameters[parameter]" />

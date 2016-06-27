@@ -2,10 +2,10 @@
 	<h2>List of Viewers</h2>
 	<md-list>
 		<md-divider></md-divider>
-		<md-list-item class="md-1-line" ng-repeat="(name, viewer) in unit.viewers track by $index">
+		<md-list-item class="md-1-line" ng-repeat="(key, viewer) in unit.viewers">
 			<div class="md-list-item-text">
-				<h3>{{name}}</h3> </div>
-			<button class="md-button md-secondary md-accent" ng-click="goToViewer(name)"> Manage
+				<h3>{{viewer.configuration.name}}</h3> </div>
+			<button class="md-button md-secondary md-accent" ng-click="goToViewer(key)"> Manage
 				<md-icon style="font-size: 1.3rem; margin: -0.15rem 0 0 0.1rem;">settings</md-icon>
 			</button>
 			<md-divider></md-divider>
