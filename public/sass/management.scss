@@ -141,6 +141,12 @@ md-list {
 					height: 100%;
 				}
 			}
+
+			.md-chip {
+				background-color: $primary;
+				color: white;
+			}
+
 			$gridFontSize: 0.9rem;
 
 			#grid {

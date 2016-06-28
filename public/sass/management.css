@@ -94,6 +94,9 @@ md-list {
       margin-bottom: 0.5rem; }
     #management #view #unit .header .buttons {
       height: 100%; }
+    #management #view #unit .md-chip {
+      background-color: #212121;
+      color: white; }
     #management #view #unit #grid {
       font-weight: bold;
       position: relative;
