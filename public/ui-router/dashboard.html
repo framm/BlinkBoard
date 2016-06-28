@@ -15,10 +15,20 @@
 <div layout="row" layout-align="end start">
 	<md-fab-speed-dial md-direction="up" class="md-scale">
 		<md-fab-trigger>
-			<button class="md-button md-fab md-primary" ng-click="addUnit()">
+			<button class="md-button md-fab md-primary">
+				<md-icon class="name button-icon material-icons">menu</md-icon>
+				<md-tooltip md-direction="left" hide-xs> Dashboard Menu </md-tooltip>
+			</button>
+		</md-fab-trigger>
+		<md-fab-actions>
+			<button class="md-button md-fab md-raised md-mini md-accent" ng-click="addViewers()">
+				<md-icon class="name button-icon material-icons">add_box</md-icon>
+				<md-tooltip md-direction="left" hide-xs> Add new viewer to multiple units </md-tooltip>
+			</button>
+			<button class="md-button md-fab md-raised md-mini md-accent" ng-click="addUnit()">
 				<md-icon class="name button-icon material-icons">add</md-icon>
 				<md-tooltip md-direction="left" hide-xs> Add New Unit </md-tooltip>
 			</button>
-		</md-fab-trigger>
+		</md-fab-actions>
 	</md-fab-speed-dial>
 </div>

@@ -422,7 +422,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 				hasBackdrop: true,
 				clickOutsideToClose: true,
 				controller: function (scope, $mdDialog) {
-					// Make name, a copy of the viewer-object, and the viewerModels available to the service
+					// Make data available to the service
 					scope.viewerModels = $scope.viewerModels;
 
 					scope.save = function (viewerData) {
@@ -448,6 +448,84 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 						firebaseUnitRef.child('viewers')
 							.child(Date.now()) // use timestamp as key
 							.set(newViewer)
+							.then(function () {
+								// Refresh data
+								getData();
+
+								// Close dialogue
+								$mdDialog.cancel();
+							});
+					}
+
+					scope.close = function () {
+						$mdDialog.cancel();
+					}
+				}
+			});
+		}
+
+		$scope.addViewers = function () {
+			$mdDialog.show({
+				templateUrl: 'templates/dialogues/addViewers.html',
+				hasBackdrop: true,
+				clickOutsideToClose: true,
+				controller: function (scope, $mdDialog) {
+					// Make data available to the service
+					scope.viewerModels = $scope.viewerModels;
+					scope.units = angular.copy($scope.units);
+
+					// Set initial state
+					scope.viewersData = {};
+					scope.viewersData.state = 'configureViewer';
+
+					scope.save = function (viewersData) {
+						// Hide spinner
+						$scope.loading = true;
+						// Construct correctly formed viewer object
+						var newViewer = {
+							type: viewersData.viewerData.type,
+							configuration: viewersData.viewerData.configuration,
+							placement: {
+								x: 10,
+								y: 10
+							},
+							size: {
+								height: $scope.viewerModels[viewersData.viewerData.type].size.height,
+								width: $scope.viewerModels[viewersData.viewerData.type].size.width
+							}
+						}
+
+						// Data-related promises
+						var promises = [];
+
+						// Get unit data for each owned unit
+						angular.forEach(viewersData.selectedUnits,
+							function (value, unitID) {
+								// Only proceed if box is checked
+								if (value === true) {
+									// 1 promise per unit
+									var unitPromise = $q.defer();
+
+									// Connection to specific unit
+									var firebaseUnitRef = firebase.database()
+										.ref('units/' + unitID + '/');
+
+									// Save new viewer to unit
+									firebaseUnitRef.child('viewers')
+										.child(Date.now()) // use timestamp as key
+										.set(newViewer)
+										.then(function () {
+											// Resolve unit promise
+											unitPromise.resolve();
+										});
+
+									// Push promise ahead
+									promises.push(unitPromise.promise);
+								}
+							});
+
+						// When all viewers are saved
+						$q.all(promises)
 							.then(function () {
 								// Refresh data
 								getData();

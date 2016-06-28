@@ -13,7 +13,6 @@ var _ = require('lodash');
 var uuid = require('node-uuid');
 
 /********** My Modules **********/
-var stockviewer = require('./viewer_modules/stockviewer');
 var currencyviewer = require('./viewer_modules/currencyviewer');
 var rssviewer = require('./viewer_modules/rssviewer');
 
@@ -68,10 +67,6 @@ blinkboard.get('/generateid', function (req, res) {
 
 
 // Data
-blinkboard.post('/stockviewer.getData', function (req, res) {
-	stockviewer.getData(req, res);
-});
-
 blinkboard.post('/currencyviewer.getData', function (req, res) {
 	currencyviewer.getData(req, res);
 });

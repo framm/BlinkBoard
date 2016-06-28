@@ -10,36 +10,48 @@
 		}
 	},
 	"viewerModels": {
+		"iframeviewer": {
+			"parameters": {
+				"url": "^(http).*//[a-z]+\\..*$",
+				"updatefrequency": "^[1-9]\\d{1,}$"
+			},
+			"placement": {
+				"x": "10",
+				"y": "10"
+			},
+			"size": {
+				"height": "400",
+				"width": "460"
+			}
+		},
 		"currencyviewer": {
 			"parameters": {
 				"from": "^[A-Z]{3}$",
 				"to": "^[A-Z]{3}$",
 				"updatefrequency": "^[1-9]\\d{1,}$"
 			},
+			"placement": {
+				"x": "10",
+				"y": "10"
+			},
 			"size": {
 				"height": "75",
-				"width": "450"
+				"width": "460"
 			}
 		},
 		"rssviewer": {
 			"parameters": {
 				"stories": "^[1-9]*$",
 				"updatefrequency": "^[1-9]\\d{1,}$",
-				"url": "^(http).*$"
+				"url": "^(http).*//[a-z]+\\..*$"
+			},
+			"placement": {
+				"x": "10",
+				"y": "10"
 			},
 			"size": {
 				"height": "300",
-				"width": "400"
-			}
-		},
-		"stockviewer": {
-			"parameters": {
-				"symbol": "^[A-Z]+$",
-				"updatefrequency": "^[1-9]\\d{1,}$"
-			},
-			"size": {
-				"height": "260",
-				"width": "380"
+				"width": "460"
 			}
 		}
 	}
