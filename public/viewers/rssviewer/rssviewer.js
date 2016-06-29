@@ -1,7 +1,7 @@
 "use strict";
 
-bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$interval', 'lodash',
-	function ($scope, $timeout, $http, $interval, lodash) {
+bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$interval',
+	function ($scope, $timeout, $http, $interval) {
 
 		// Check if all configuration values are defined
 		if ($scope.data.configuration.updatefrequency === undefined) {
@@ -20,7 +20,7 @@ bbUnit.controller('RSSviewerController', ['$scope', '$timeout', '$http', '$inter
 			var newDataChanged = newData;
 
 			// Compare to previous data
-			if (_.isEqual(prevData.value, newData.value) === true) {
+			if (angular.equals(prevData.value, newData.value) === true) {
 				newDataChanged.changed = false;
 			} else {
 				newDataChanged.changed = true;
