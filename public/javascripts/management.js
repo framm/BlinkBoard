@@ -187,12 +187,6 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 		/*----------- Log in/out functions -----------*/
 
-		// Temporary user
-		$scope.tempUser = {
-			email: env.DEV_USER,
-			password: env.DEV_PASSWORD
-		}
-
 		// Log in
 		$scope.login = function (email, password) {
 			// Show spinner

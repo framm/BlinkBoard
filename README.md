@@ -21,13 +21,9 @@ FIREBASE_APIKEY=[insert Google project API key]
 FIREBASE_AUTHDOMAIN=[insert Firebase domain (e.g. myapp.firebaseio.com)]
 FIREBASE_DATABASEURL=[insert Firebase url (e.g. https://myapp.firebaseio.com/)]
 PORT=[insert the port you want to use (e.g. 80)]
-DEV_USER=[insert your user (e.g. user@mail.com)]
-DEV_PASSWORD=[insert your password]
 ```
 
-The `DEV_USER` and `DEV_PASSWORD` are only there for convenience while testing so you don't have to retype these when you log in. When ready for production, you should remove these and change the login page code to reflect it.
-
-Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below. Now you should be able to run the server using the command `gulp`.
+Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below. Now you should be able to run the server using the command `gulp` if developing, or just `node blinkboard` if in production.
 
 There is currently no custom user-management, so just use FireBase' online controlpanel for now.
 
@@ -49,4 +45,4 @@ When running the server, 3 endpoints become available:
 
 ### How to Add Viewers
 
-As previously mentioned, viewers are simply Angular directives with parameters. The outlines of these parameters are defined in the `viewerModels` database-object, so by adding to this, you can define your own. Look at the sample viewers in `public/viewers/` for inspiration. Please take note that currently you need to refresh the dashboard hosting device after having added a new viewer type, as directives are dependencies of Angular on initilization.
+As previously mentioned, viewers are simply Angular directives with parameters. The outlines of these parameters are defined in the `viewerModels` database-object, so by adding to this, you can define your own. Look at the sample viewers in `public/viewers/` for inspiration. Please take note that currently you need to refresh the dashboard hosting device after having added a new viewer type, as directives are dependencies of Angular on initialization.
