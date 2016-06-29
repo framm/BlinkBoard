@@ -17,8 +17,7 @@
 		"material-design-icons": "~2.2.1",
 		"angular-ui-router": "~0.3.1",
 		"angularfire": "~2.0.1",
-		"flag-icon-css": "~2.3.0",
-		"ng-lodash": "~0.5.0"
+		"flag-icon-css": "~2.3.0"
 	},
 	"devDependencies": {},
 	"resolutions": {
