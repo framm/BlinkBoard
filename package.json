@@ -3,7 +3,8 @@
 	"author": "Mathias Løkke Madsen",
 	"license": "Creative Commons (BY-NC)",
 	"scripts": {
-		"start": "node ./bin/www"
+		"start": "node ./bin/www",
+		"postinstall": "./node_modules/bower/bin/bower install"
 	},
 	"dependencies": {
 		"body-parser": "^1.0.0",
