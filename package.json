@@ -8,8 +8,8 @@
 	},
 	"main": "blinkboard.js",
 	"scripts": {
-		"start": "node blinkboard",
-		"postinstall": "bower install ./public"
+		"postinstall": "bower install",
+		"start": "node blinkboard"
 	},
 	"dependencies": {
 		"body-parser": "~1.0.0",

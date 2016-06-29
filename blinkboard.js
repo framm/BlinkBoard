@@ -28,6 +28,7 @@ blinkboard.use(bodyParser.urlencoded({
 	extended: true
 }));
 blinkboard.use(express.static(path.join(__dirname, 'public')));
+blinkboard.use('/bower_components', express.static('bower_components'));
 
 // blinkboards
 blinkboard.get('/', function (req, res) {
