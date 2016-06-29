@@ -92,10 +92,10 @@ module.exports = {
 			};
 
 			// Conversions
-			if (req.body.from === 'USD') { // If from is USD
-				object.rate = currencyData[req.body.to].rate;
-			} else if (req.body.to === 'USD') { // If to is USD
-				object.rate = (1 / currencyData[req.body.from].rate);
+			if (req.body.to === 'USD') { // If from is USD
+				object.rate = currencyData[req.body.from].rate;
+			} else if (req.body.from === 'USD') { // If to is USD
+				object.rate = (1 / currencyData[req.body.to].rate);
 			} else {
 				object.rate = (currencyData[req.body.from].rate / currencyData[req.body.to].rate);
 			}
