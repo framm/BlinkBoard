@@ -1,12 +1,18 @@
 FROM node:argon
 
-# Create app directory
+# App directory
 RUN mkdir -p /usr/src/BlinkBoard
 WORKDIR /usr/src/BlinkBoard
 
-# Copy and app
-COPY / /usr/src/BlinkBoard/
+# Clone project
+RUN cd /usr/src/BlinkBoard/
+RUN git clone https://github.com/mathiaslm89/BlinkBoard.git .
+COPY /.env /usr/src/BlinkBoard/.env
 
+# Install dependencies
+RUN npm install
+
+# Prepare app
 EXPOSE 7331
-
-CMD [ "node", "blinkboard" ]
+CMD [ "npm", "start" ]
+RUN echo 'run e.g. [docker run -d -p 7331:7331 a2f0588ed891]'
