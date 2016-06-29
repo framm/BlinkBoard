@@ -19,5 +19,8 @@
 		"angularfire": "^2.0.1",
 		"flag-icon-css": "^2.3.0",
 		"ng-lodash": "^0.5.0"
+	},
+	"resolutions": {
+		"angular": "^1.5.5"
 	}
 }
