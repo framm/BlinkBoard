@@ -8,7 +8,7 @@
 	},
 	"main": "blinkboard.js",
 	"scripts": {
-		"start": "node ./bin/www",
+		"start": "node blinkboard",
 		"postinstall": "bower install ./public"
 	},
 	"dependencies": {
