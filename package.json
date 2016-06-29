@@ -1,7 +1,12 @@
 {
 	"name": "BlinkBoard",
 	"author": "Mathias Løkke Madsen",
-	"license": "Creative Commons (BY-NC)",
+	"license": "CC-BY-NC-4.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mathiaslm89/BlinkBoard.git"
+	},
+	"main": "blinkboard.js",
 	"scripts": {
 		"start": "node ./bin/www",
 		"postinstall": "bower install ./public"
