@@ -1,6 +1,6 @@
 "use strict";
 
-var bbUnit = angular.module('bbUnit', ['firebase', 'ngLodash']);
+var bbUnit = angular.module('bbUnit', ['firebase']);
 
 
 /*=============================================>>>>>
