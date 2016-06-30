@@ -90,6 +90,7 @@ bbManagement.controller('ManagementController', ['$scope', '$location', '$state'
 
 					// Hide spinner
 					$scope.loading = false;
+					$scope.$digest();
 				} else {
 					// Data-related promises
 					var promises = [];
