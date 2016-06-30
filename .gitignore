@@ -61,4 +61,5 @@ Temporary Items
 
 # Environment
 .env
+.env_production
 # gulpfile.js
