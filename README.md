@@ -14,7 +14,7 @@ In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.co
 
 ### Installation
 
-Having cloned the repository, cd into the `BlinkBoard` directory and run `npm install`. Now you need to create a [FireBase](https://www.firebase.com/) account. Having created an _app_, you need to enable email-authentication and create a user. When finished you have the information needed in order to setup the environment variables. Create a file called `.env` in the root 'BlinkBoard' directory and fill it out as follows:
+Having cloned the repository, you now need to create a [FireBase](https://www.firebase.com/) app. Having created an _app_, you need to enable email-authentication and create a user. When finished you have the information needed in order to setup the environment variables. Create a file called `.env` in the root 'BlinkBoard' directory and fill it out as follows:
 
 ```
 FIREBASE_APIKEY=[insert Google project API key]
@@ -23,7 +23,9 @@ FIREBASE_DATABASEURL=[insert Firebase url (e.g. https://myapp.firebaseio.com/)]
 PORT=[insert the port you want to use (e.g. 80)]
 ```
 
-Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below. Now you should be able to run the server using the command `gulp` if developing, or just `npm start` if in production.
+Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below.
+
+To install the app, simply run `npm install` and wait it out. You can also run it in a Docker container using the command `docker build -f docker.build -t blinkboard --rm=true .`. Either way, you can afterwards start the application using the command `gulp` if developing, or `npm start` if in production.
 
 There is currently no custom user-management, so just use FireBase' online controlpanel for now.
 
