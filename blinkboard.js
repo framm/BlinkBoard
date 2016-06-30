@@ -38,7 +38,7 @@ blinkboard.get('/', function (req, res) {
 		method: 'GET'
 	}, function (error, response, body) {
 		if (error) {
-			console.log(error);
+			console.log('error: ', error);
 		} else {
 			// Provide array of viewer types to the render function
 			res.render('unit', {

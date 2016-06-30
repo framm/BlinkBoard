@@ -11,7 +11,7 @@ module.exports = {
 		try {
 			feed(req.body.url, function (error, articles) {
 				if (error) {
-					console.log(error);
+					console.log('error: ', error);
 				} else {
 					// Construct object for changed info
 					var RSSfeed = {};
@@ -40,7 +40,7 @@ module.exports = {
 				}
 			});
 		} catch (error) {
-			console.log(error);
+			console.log('error: ', error);
 		}
 	}
 }

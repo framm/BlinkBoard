@@ -16,13 +16,13 @@ function getCurrencyData() {
 			method: 'GET'
 		}, function (error, response, body) {
 			if (error) {
-				console.log(error);
+				console.log('error: ', error);
 			} else {
 				// Parse data
 				try {
 					var tempDataObject = JSON.parse(body);
 				} catch (error) {
-					console.log(error);
+					console.log('error: ', error);
 				}
 
 				// Strip useless data
@@ -32,7 +32,7 @@ function getCurrencyData() {
 				for (var i = tempDataObject.length - 1; i >= 0; i--) {
 					// Check if response is defined (it randomly isn't, damn Yahoo)
 					if ((tempDataObject[i].resource.fields.name === undefined) || (tempDataObject[i].resource.fields.price === undefined) || (tempDataObject[i].resource.fields.ts === undefined)) {
-						console.log(tempDataObject[i].resource.fields);
+						//console.log(tempDataObject[i].resource.fields);
 						continue;
 					};
 
@@ -49,7 +49,7 @@ function getCurrencyData() {
 			}
 		});
 	} catch (error) {
-		console.log(error);
+		console.log('error: ', error);
 	}
 }
 
@@ -116,7 +116,7 @@ module.exports = {
 
 			//console.log(Date.now(), 'updated currency data');
 		} catch (error) {
-			console.log(error);
+			console.log('error: ', error);
 		}
 	}
 }
