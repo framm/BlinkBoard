@@ -10,7 +10,7 @@ BlinkBoard is a lightweight administration platform for web-based dashboards. Im
 
 ### Dependencies
 
-In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.com/) as its database, but only makes use of the realtime-API on the dashboard hosting device, so it could be changed to use any sort of database without too much work. The platform runs as a Node.js server, so along with the before mentioned monitor and Raspberry Pi, you do need a server as well. Other than that, you just need the usual NPM and Bower to install and run the platform.
+In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.com/) as its database, but only makes use of the realtime-API on the dashboard hosting device, so it could be changed to use any sort of database without too much work. The platform runs as a Node.js server, so along with the before mentioned monitor and Raspberry Pi, you do need a server as well. Other than that, you just need NPM to install and run the platform.
 
 ### Installation
 
