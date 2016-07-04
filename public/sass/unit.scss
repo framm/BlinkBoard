@@ -28,6 +28,40 @@ a {
 			animation: fade 5s;
 			animation-timing-function: ease-in-out;
 		}
+
+		/*=============================================>>>>>
+		= Material Design font styles =
+		===============================================>>>>>*/
+
+		.font-headline {
+			font-size: 2.4rem;
+			font-weight: 500;
+		}
+
+		.font-title {
+			font-size: 2rem;
+			font-weight: 700;
+		}
+
+		.font-subheading {
+			font-size: 1.6rem;
+			font-weight: 500;
+		}
+
+		.font-body-2 {
+			font-size: 1.4rem;
+			font-weight: 700;
+		}
+
+		.font-body-1 {
+			font-size: 1.4rem;
+			font-weight: 500;
+		}
+
+		.font-caption {
+			font-size: 1.2rem;
+			font-weight: 500;
+		}
 	}
 }
 /** Keyframes **/

@@ -13,19 +13,16 @@ rssviewer {
 	.story {
 		margin-top: 1rem;
 
+		&:first-child {
+			margin-top: 0;
+		}
+
 		.published {
-			font-weight: 500;
-			font-size: 1rem;
 			color: #999;
 			display: inline-block;
 			display: flex;
 			justify-content: space-between;
 			margin-bottom: 0.2rem;
-		}
-
-		.title {
-			font-weight: 500;
-			font-size: 1.2rem;
 		}
 	}
 }

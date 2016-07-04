@@ -9,30 +9,24 @@ currencyviewer {
 
 	.from {
 		display: inline-block;
-		font-weight: 400;
-		font-size: 1.6rem;
 		margin-right: 0.5rem;
 	}
 
 	.to {
 		display: inline-block;
-		font-weight: 400;
-		font-size: 1.6rem;
 		margin-left: 0.5rem;
 	}
 
 	.rate {
 		display: inline-block;
-		font-weight: 500;
-		font-size: 2.4rem;
 		position: relative;
-		top: 4px;
+		top: 3px;
 	}
 
 	.flag-icon {
-		@include border-radius(1.2rem);
-		font-size: 2.2rem;
+		@include border-radius(0.8rem);
+		font-size: 1.6rem;
 		position: relative;
-		top: 3px;
+		top: 0;
 	}
 }
