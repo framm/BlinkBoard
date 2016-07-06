@@ -10,11 +10,11 @@ BlinkBoard is a lightweight administration platform for web-based dashboards. Im
 
 ### Dependencies
 
-In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.com/) as its database, but only makes use of the realtime-API on the dashboard hosting device, so it could be changed to use any sort of database without too much work. The platform runs as a Node.js server, so along with the before mentioned monitor and Raspberry Pi, you do need a server as well. Other than that, you just need NPM to install and run the platform.
+In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.com/) as its database, but only makes use of the realtime-API on the dashboard hosting device, so it could be changed to use any sort of database without too much work. The platform runs as a Node.js server, so along with the before mentioned monitor and Raspberry Pi, you do need a server as well. Other than that, you just need Docker or NPM to install and run the platform.
 
 ### Installation
 
-First you now need to create a [FireBase](https://www.firebase.com/) app with a user. Having accomplished that, you have the information needed to setup the environment variables. Create a file called `.env` and fill it out as follows:
+First you need to create a [FireBase](https://www.firebase.com/) app with at least 1 user. Having accomplished that, you have the information needed to setup the environment variables. Create a file called `.env` and fill it out as follows:
 
 ```
 FIREBASE_APIKEY=[insert Google project API key]
@@ -25,7 +25,7 @@ PORT=[insert the port you want to use (e.g. 80)]
 
 Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below.
 
-To install and run the app, by far the easiest is to use Docker: `docker run -d --env-file=.env -p [port]:[port] mathiaslm89/BlinkBoard` Alternatively, clone the repository and run `npm install` followed by `npm start`.
+To install and run the app, by far the easiest is to use Docker: `docker run -d --env-file=.env -p [port]:[port] mathiaslm/blinkboard:master` Alternatively, clone the repository and run `npm install` followed by `npm start`.
 
 ### How to Use
 
