@@ -37,13 +37,11 @@ The structure of BlinkBoard consists of 3 objects:
 - `Units` are the clients displaying the dashboard. A `unit` is defined by its unique `unitID`, which is set in the browsers `LocalStorage` using the `/setid#` entrypoint. Once a `unit` is added by any `user`, it will forever exists in the database. `Users` do not own `units`, thus multiple `users` can manage the same `unit` at the same time.
 - `Viewers` are the modules being displayed on the dashboards and are defined in the `viewerModels` database-object. A `viewer` instance is owned by a `unit`.
 
-![diagram](README/diagram.png)
-
 When running the server, 3 endpoints become available:
 
-- `/setid#` should only be used once, when adding a dashboard. In order for the dashboard hosting device (e.g. raspberry pi) to know what to display, it has to have a unique `unitID`. This ID is stored in the browsers `LocalStorage` and can be set or regenerated at this endpoint (point the raspberry pi's browser to this).
+- `/setid` should only be used once, when adding a dashboard. In order for the dashboard hosting device (e.g. raspberry pi) to know what to display, it has to have a unique `unitID`. This ID is stored in the browsers `LocalStorage` and can be set or regenerated at this endpoint (point the raspberry pi's browser to this).
 - `/` is where the actual dashboard is displayed. As such, when you for instance open a browser on your dashboard hosting device, just by pointing it to the address of the server, it should display the dashboard.
-- `/management#` is where you manage your dashboards. You login using your FireBase credentials and add the units (dashboards) you want to manage. Any change you make here should automatically be reflected on the units. This is what makes BlinkBoard easy.
+- `/management` is where you manage your dashboards. You login using your FireBase credentials and add the units (dashboards) you want to manage. Any change you make here should automatically be reflected on the units. This is what makes BlinkBoard easy.
 
 ### How to Add Viewers
 
