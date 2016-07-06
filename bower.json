@@ -18,9 +18,5 @@
 		"angular-ui-router": "~0.3.1",
 		"angularfire": "~2.0.1",
 		"flag-icon-css": "~2.3.0"
-	},
-	"devDependencies": {},
-	"resolutions": {
-		"angular": "~1.5.7"
 	}
 }
