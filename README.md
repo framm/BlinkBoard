@@ -14,7 +14,7 @@ In its current form, BlinkBoard uses Google's [FireBase](https://www.firebase.co
 
 ### Installation
 
-Having cloned the repository, you now need to create a [FireBase](https://www.firebase.com/) app. Having created an _app_, you need to enable email-authentication and create a user. When finished you have the information needed in order to setup the environment variables. Create a file called `.env` in the root 'BlinkBoard' directory and fill it out as follows:
+First you now need to create a [FireBase](https://www.firebase.com/) app with a user. Having accomplished that, you have the information needed to setup the environment variables. Create a file called `.env` and fill it out as follows:
 
 ```
 FIREBASE_APIKEY=[insert Google project API key]
@@ -25,9 +25,7 @@ PORT=[insert the port you want to use (e.g. 80)]
 
 Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below.
 
-To install the app, simply run `npm install` and wait it out. You can also run it in a Docker container using the build-command `docker build -f Dockerfile -t blinkboard --rm=true .` and then running it using the command `docker run -d --env-file=.env -p [port]:[port] [imageID]` Either way, you can afterwards start the application using the command `gulp` if developing, or `npm start` if in production.
-
-There is currently no custom user-management, so just use FireBase' online controlpanel for now.
+To install and run the app, by far the easiest is to use Docker: `docker run -d --env-file=.env -p [port]:[port] mathiaslm89/BlinkBoard` Alternatively, clone the repository and run `npm install` followed by `npm start`.
 
 ### How to Use
 
