@@ -2,7 +2,6 @@ FROM node:wheezy
 
 # Clone project
 RUN git clone https://github.com/mathiaslm89/BlinkBoard.git /usr/BlinkBoard/
-COPY /.env /usr/BlinkBoard/.env
 
 # Set working directory
 WORKDIR /usr/BlinkBoard
@@ -16,8 +15,7 @@ RUN bower --allow-root install
 RUN npm install
 
 # Prepare app
-EXPOSE 7331
 CMD [ "npm", "start" ]
 
 # How to run
-RUN echo 'run e.g. [docker run -d -p 7331:7331 a2f0588ed891]'
+RUN echo 'run e.g. [docker run -d --env-file=.env -p {port}:{port} {containerID}]'

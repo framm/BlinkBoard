@@ -25,7 +25,7 @@ PORT=[insert the port you want to use (e.g. 80)]
 
 Now you need to add the rules provided in the `rules.json` file to the app in the [FireBase](https://www.firebase.com/) administration system. Just copy paste them and save. Currently, you also need to import the `viewers.json` file into the database. This contains information about the available viewers, which I will explain in the _How to Use_ section below.
 
-To install the app, simply run `npm install` and wait it out. You can also run it in a Docker container using the command `docker build -f docker.build -t blinkboard --rm=true .` Either way, you can afterwards start the application using the command `gulp` if developing, or `npm start` if in production.
+To install the app, simply run `npm install` and wait it out. You can also run it in a Docker container using the command `docker build -f Dockerfile -t blinkboard --rm=true .` Either way, you can afterwards start the application using the command `gulp` if developing, or `npm start` if in production.
 
 There is currently no custom user-management, so just use FireBase' online controlpanel for now.
 
