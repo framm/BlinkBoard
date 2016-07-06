@@ -2,8 +2,6 @@
 
 ## Web-based Dashboard Platform
 
-![example](README/example.jpg)
-
 ### Introduction
 
 BlinkBoard is a lightweight administration platform for web-based dashboards. Imagine you have an old monitor in spare, perhaps a Raspberry Pi you don't know what to do with - BlinkBoard lets you transform this setup into a slick dashboard. By now, you're probably wondering, what kind of information you want to display on such a dashboard. Well, the architecture allows for anything, really, and I've included a few sample _viewers_ (as I call them) to show how they function. And you have to build these yourself. Viewers are simply Angular directives with specific parameters. BlinkBoard simply makes the administration of these settings along with placement on the monitor easy.
