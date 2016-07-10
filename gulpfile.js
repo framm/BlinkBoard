@@ -11,7 +11,7 @@ var sass = require('gulp-sass');
 var styling = 'public/sass/';
 var viewerStyling = 'public/viewers/';
 var client = ['public/javascripts/**/*', 'public/templates/**/*', 'public/viewers/**/*', 'public/ui-router/**/*'];
-var server = ['app.js', '.env', 'viewer_modules/**/*', 'views/**/*'];
+var server = ['blinkboard.js', '.env', 'viewer_modules/**/*', 'views/**/*'];
 
 // Compile sass and livereload
 gulp.task('styling', function () {
